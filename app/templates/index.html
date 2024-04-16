@@ -1,0 +1,21 @@
+{% load draw_menu %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tree Menu</title>
+</head>
+<body>
+    <a href="/">Главная страница</a>
+    <ul>
+    {% for parent in parent_menus %}
+        <li><a href="{% url 'menu:parent' parent.slug %}">{{ parent.title }}</a></li>
+        <ul>
+            {% for child in parent.child.all %}
+                <li><a href="{% url 'menu:child' parent.slug child.slug %}">{{ child.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+    </ul>
+</body>
+</html>
